@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			/*#oCan{
+				width: 1000px;
+				height: 650px;
+			}*/
+		</style>
+	</head>
+	<body style="background-color:#fff">
+		<canvas id="oCan" width="1600" height="650"></canvas>
+		<script>
+			var canvas = document.getElementById('oCan');
+			let dateArr = [];
+			let years = 2016;
+			let month = 0;
+			var startX = 100;
+			var startY = 600;
+			var ctx = canvas.getContext('2d');
+			const salary = ['0','50k','100k','150k'];
+			const data = [89815.85,65441.37,68983.43,80520.7,71360.8,71308.09,97843.1,74963.94,72430.98,81891.22,126140.22,57712.01,85631.15,
+			68464.57,73150.3,91573.05,81404.2,76903.97,71145.33,81884.51,90759.47,80811.97,76918.84,99999.56];
+			for(let i = 0 ; i<24;i++){
+				++month;
+				month = transFromMonthType(month);
+				dateArr.push(years + '-' + month);
+				if(month === 12){
+					years++;
+					month = 0;
+				}
+			}
+			function transFromMonthType (date) {
+				if(date < 10){
+				return "0" + date + ''
+				}
+				return date
+			}
+			console.log(dateArr);
+			//建立坐标系
+			function create(){
+				ctx.beginPath();
+				//轴线
+				ctx.moveTo(startX,startY);
+				ctx.lineTo(startX,0);
+				ctx.moveTo(startX,startY);
+				ctx.lineTo(1600,startY);
+				ctx.strokeStyle="#ccc";
+				ctx.stroke();
+				ctx.closePath();
+				
+				ctx.beginPath();
+				//横线
+				ctx.moveTo(startX,400);
+				ctx.lineTo(1600,400);
+				ctx.moveTo(startX,200);
+				ctx.lineTo(1600,200);
+				ctx.moveTo(startX,0);
+				ctx.lineTo(1600,0);
+				ctx.strokeStyle="#ccc";
+				ctx.stroke();
+				ctx.closePath();
+				
+			}
+			//填充横纵坐标
+			function insert(){
+				var x = 100;
+				var y = 600;
+				var offsetY = 600 * (1-(data[0]/150000));
+				//绘制横坐标
+				ctx.moveTo(125,offsetY);
+				ctx.fillText(data[0],110,offsetY-5);
+				for(var i= 0; i <dateArr.length;i++){
+					ctx.textAlign="start";
+					ctx.fillText(dateArr[i],x,y+20);	
+					x += 50;
+					if(i > 0){
+						offsetY = 600 * (1-(data[i]/150000));
+						ctx.textAlign="right";
+						ctx.fillText(data[i],x,offsetY-5);
+						buildLineChart(x,offsetY);
+					}
+					
+				}
+				x = 100;
+				y = 600;
+				//绘制纵坐标
+				for(let j = 0 ;j < salary.length;j++){
+					ctx.textAlign = 'center';
+					ctx.fillText(salary[j],x-40,y);
+					y -= 197;//偏差问题
+				}
+				
+			}
+			//建立折线图
+			function buildLineChart(x,y){
+				let yet1 = y;
+				ctx.lineTo(x-25,yet1);
+				ctx.strokeStyle = "#3FA7DC";
+				ctx.stroke();
+			}
+			
+			
+			insert();
+			create();
+			
+		</script>
+	</body>
+</html>

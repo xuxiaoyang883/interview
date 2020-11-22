@@ -1,0 +1,18 @@
+1、什么是 canvas?
+	HTML5 <canvas> 元素用于图形的绘制，通过脚本 (通常是JavaScript)来完成.
+
+2、我们如何使用Canvas来画一条简单的线？
+	a、html中创建Canvas标签，
+	b、用js获取并用getContext('2d')设置canvas的绘图环境 
+	c.使用moveTo（）设置初始坐标， lineTo（）设置结束坐标， stroke（）绘制路径
+3、你能解释一下CSS的盒子模型么？
+	CSS盒模型是围绕在HTML元素周围的定义Border边界，padding内边距和margin外边距的矩形空间
+	border:元素的边框（可能不可见），用于将框的边缘与其他框分开；
+	padding:内边距，表示框内容和边框之间的空间。
+	margin：外边距，表示框的边缘与相邻框之间的距离，也称为页边空白，
+
+
+
+
+
+	

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="hello">
+			
+		</div>
+		<script>
+			var h = document.querySelector('#hello');
+			function a(){
+				return function b(){
+					h.style.background = "red";
+				}
+			}
+			const module = {
+			  x: 42,
+			  getX: function() {
+			    return this.x;
+			  }
+			};
+			
+			const unboundGetX = module.getX;
+			console.log(unboundGetX()); // The function gets invoked at the global scope
+			// expected output: undefined
+			
+			const boundGetX = unboundGetX.bind(module,undefined);//第二个参数undefined不会影响当前函数上下文
+			console.log(boundGetX());
+		</script>
+	</body>
+</html>
